@@ -37,8 +37,8 @@ module.exports = gql`
         updatedAt: String!
     }
     type Query{
-        getPosts: [Post]
-        getUsers: [User]
+        getPosts(limit: Int!, tag: String, page: Int!, sortBy: String): [Post]
+        # getUsers: [User]
         getPost(postID: ID): Post
         getUser(userID: ID): User
     }

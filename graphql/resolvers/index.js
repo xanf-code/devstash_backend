@@ -5,8 +5,6 @@ const viewsResolvers = require('./views');
 
 module.exports = {
     Post: {
-        likeCount: (parent) => parent.likes.length,
-        viewCount: (parent) => parent.views.length,
         // TRENDING ALGORITHM
         score(parent) {
             let lc = parent.likes.length;
@@ -16,7 +14,7 @@ module.exports = {
             var currentTimestamp = Math.round(new Date().getTime() / 1000);
             var hour = (currentTimestamp - createdAt) / 60 / 60;
             hour = hour < 1 ? hour.toFixed(2) : Math.round(hour);
-            if (point <= 0) {
+            if (point <= 1.5) {
                 return 0;
             } else {
                 var q1 = point - 1.5;

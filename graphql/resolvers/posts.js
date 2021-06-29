@@ -3,10 +3,19 @@ const checkUser = require('../utils/checkUser')
 
 module.exports = {
     Query: {
-        async getPosts() {
+        async getPosts(_, { limit, tag, page, sortBy }) {
             try {
-                const post = await Post.find().sort({ createdAt: -1 });
-                return post;
+                if (tag) {
+                    const post = await Post.find(
+                        { "tag": tag }
+                    ).skip((page - 1) * limit)
+                        .limit(limit).sort(sortBy || "-createdAt");
+                    return post;
+                } else {
+                    const post = await Post.find().skip((page - 1) * limit)
+                        .limit(limit).sort(sortBy || "-createdAt");
+                    return post;
+                }
             } catch (error) {
                 throw new Error(error);
             }
@@ -34,6 +43,8 @@ module.exports = {
                 userID: user._id,
                 username: user.name,
                 createdAt: Math.round(new Date().getTime() / 1000),
+                likeCount: 0,
+                viewCount: 0,
             });
 
             const stash = await newStash.save();

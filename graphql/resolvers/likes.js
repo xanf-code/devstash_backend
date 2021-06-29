@@ -1,5 +1,6 @@
 const Post = require('../../models/Posts');
 const checkUser = require('../utils/checkUser')
+const { updateLikes } = require('../utils/updateScore')
 
 module.exports = {
     Mutation: {
@@ -18,6 +19,7 @@ module.exports = {
                                 createdAt: new Date().toISOString(),
                             })
                         }
+                        updateLikes(post)
                         await post.save();
                         return post;
                     }

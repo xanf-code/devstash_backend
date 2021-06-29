@@ -1,4 +1,5 @@
 const Post = require('../../models/Posts');
+const { updateViews } = require('../utils/updateScore')
 
 module.exports = {
     Mutation: {
@@ -8,7 +9,6 @@ module.exports = {
                 if (userID) {
                     if (post) {
                         if (post.views.find(view => view.uuid === userID)) {
-                            // post.views = post.views.filter(view => view.uuid !== userID)
                             return post;
                         } else {
                             post.views.push({
@@ -16,6 +16,7 @@ module.exports = {
                                 createdAt: new Date().toISOString(),
                             })
                         }
+                        updateViews(post);
                         await post.save();
                         return post;
                     }

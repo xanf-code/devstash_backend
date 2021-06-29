@@ -3,14 +3,14 @@ const User = require('../../models/Users');
 
 module.exports = {
     Query: {
-        async getUsers() {
-            try {
-                const users = await User.find();
-                return users;
-            } catch (error) {
-                throw new Error(error);
-            }
-        },
+        // async getUsers() {
+        //     try {
+        //         const users = await User.find();
+        //         return users;
+        //     } catch (error) {
+        //         throw new Error(error);
+        //     }
+        // },
         async getUser(_, { userID }) {
             try {
                 const user = await User.findById(userID);
