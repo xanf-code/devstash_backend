@@ -34,14 +34,18 @@ module.exports = {
         }
     },
     Mutation: {
-        async createPost(_, { userID, body, title, tag }) {
+        async createPost(_, { userID, body, title, tag, image }) {
             const user = await checkUser(userID);
             const newStash = new Post({
                 body,
                 title,
                 tag,
-                userID: user._id,
-                username: user.name,
+                image,
+                creator: {
+                    userID: user._id,
+                    username: user.name,
+                    userImage: user.image,
+                },
                 createdAt: Math.round(new Date().getTime() / 1000),
                 likeCount: 0,
                 viewCount: 0,

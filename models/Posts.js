@@ -1,12 +1,16 @@
 const { model, Schema } = require('mongoose');
 
+const creatorSchema = new Schema({
+    username: String,
+    userImage: String,
+    userID: String,
+})
+
 const postSchema = new Schema({
     title: String,
     body: String,
     image: String,
     createdAt: String,
-    userID: String,
-    username: String,
     tag: String,
     likes: [
         {
@@ -24,9 +28,9 @@ const postSchema = new Schema({
     likeCount: Number,
     viewCount: Number,
     score: Number,
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users',
+    creator: {
+        type: creatorSchema,
+        _id: false,
     }
 });
 
