@@ -7,7 +7,12 @@ const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers');
 
 const server = new ApolloServer({
-    typeDefs, resolvers
+    cors: {
+        origin: '*',
+        credentials: true,
+    },
+    typeDefs,
+    resolvers,
 });
 
 let mongoURL = process.env.MONGODB;
