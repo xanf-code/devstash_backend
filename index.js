@@ -8,12 +8,13 @@ const resolvers = require('./graphql/resolvers');
 
 const server = new ApolloServer({
     playground: true,
-    // cors: {
-    //     origin: "*",
-    //     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    //     preflightContinue: false,
-    //     credentials: true
-    // },
+    introspection: true,
+    cors: {
+        origin: "*",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        preflightContinue: false,
+        credentials: true
+    },
     typeDefs,
     resolvers,
 });
