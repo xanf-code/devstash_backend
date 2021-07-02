@@ -5,16 +5,17 @@ module.exports = {
     Query: {
         async getPosts(_, { limit, tag, page, sortBy }) {
             try {
+                const count = await Post.collection.countDocuments();
                 if (tag) {
                     const post = await Post.find(
                         { "tag": tag }
                     ).skip((page - 1) * limit)
                         .limit(limit).sort(sortBy || "-createdAt");
-                    return post;
+                    return { posts: post, count: count, limit: limit, page: page };
                 } else {
                     const post = await Post.find().skip((page - 1) * limit)
                         .limit(limit).sort(sortBy || "-createdAt");
-                    return post;
+                    return { posts: post, count: count, limit: limit, page: page, };
                 }
             } catch (error) {
                 throw new Error(error);

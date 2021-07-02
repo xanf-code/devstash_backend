@@ -1,6 +1,13 @@
 const gql = require('graphql-tag');
 
 module.exports = gql`
+    type StashResponse {
+        posts: [Post]!
+        count: Int!
+        limit: Int!
+        page: Int!
+        hasNext: Boolean!
+    }
     type Creator {
         username: String
         userImage: String
@@ -42,7 +49,7 @@ module.exports = gql`
         updatedAt: String!
     }
     type Query{
-        getPosts(limit: Int!, tag: String, page: Int!, sortBy: String): [Post]
+        getPosts(limit: Int!, tag: String, page: Int!, sortBy: String): StashResponse!
         # getUsers: [User]
         getPost(postID: ID): Post
         getUser(userID: ID): User

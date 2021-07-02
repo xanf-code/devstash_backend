@@ -4,6 +4,11 @@ const likesResolvers = require('./likes');
 const viewsResolvers = require('./views');
 
 module.exports = {
+    StashResponse: {
+        hasNext(parent) {
+            return (parent.page + 1) <= (Math.round(parent.count / parent.limit).toFixed()) ? true : false
+        }
+    },
     Post: {
         // TRENDING ALGORITHM
         score(parent) {
