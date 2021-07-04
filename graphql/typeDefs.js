@@ -49,7 +49,8 @@ module.exports = gql`
         updatedAt: String!
     }
     type Query{
-        getPosts(limit: Int!, tag: String, page: Int!, sortBy: String): StashResponse!
+        getPosts(limit: Int, tag: String, page: Int, sortBy: String): StashResponse!
+        getAllPosts: [Post]
         # getUsers: [User]
         getPost(postID: ID): Post
         getUser(userID: ID): User

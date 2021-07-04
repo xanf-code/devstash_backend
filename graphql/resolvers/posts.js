@@ -32,6 +32,18 @@ module.exports = {
             } catch (err) {
                 throw new Error(err);
             }
+        },
+        async getAllPosts() {
+            try {
+                const post = await Post.find().sort('-createdAt');
+                if (post) {
+                    return post;
+                } else {
+                    throw new Error('No Posts');
+                }
+            } catch (err) {
+                throw new Error(err);
+            }
         }
     },
     Mutation: {
