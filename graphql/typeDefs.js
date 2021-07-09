@@ -47,6 +47,7 @@ module.exports = gql`
         name: String!
         createdAt: String!
         updatedAt: String!
+        bookmarks: [String!]
     }
     type Query{
         getPosts(limit: Int, tag: String, page: Int, sortBy: String): StashResponse!
@@ -54,6 +55,7 @@ module.exports = gql`
         # getUsers: [User]
         getPost(postID: ID): Post
         getUser(userID: ID): User
+        getBookmarksPosts(userID: ID): [Post] 
     }
     type Mutation{
         userData(_id: ID!): User!
@@ -61,5 +63,6 @@ module.exports = gql`
         deletePost(userID: String! postID: ID!) : String!
         likePost(userID: String! postID: ID!) : Post!
         addView(userID: String! postID: ID!) : Post!
+        addBookmark(userID: String! postID: String!) : User!
     }
 `;

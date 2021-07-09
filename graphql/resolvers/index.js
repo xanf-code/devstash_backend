@@ -2,6 +2,7 @@ const postsResolvers = require('./posts');
 const usersResolvers = require('./users');
 const likesResolvers = require('./likes');
 const viewsResolvers = require('./views');
+const bookmarksResolvers = require('./bookmarks');
 
 module.exports = {
     StashResponse: {
@@ -45,11 +46,13 @@ module.exports = {
     Query: {
         ...postsResolvers.Query,
         ...usersResolvers.Query,
+        ...bookmarksResolvers.Query,
     },
     Mutation: {
         ...usersResolvers.Mutation,
         ...postsResolvers.Mutation,
         ...likesResolvers.Mutation,
         ...viewsResolvers.Mutation,
+        ...bookmarksResolvers.Mutation,
     }
 }

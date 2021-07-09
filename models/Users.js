@@ -6,6 +6,7 @@ const userSchema = new Schema({
     createdAt: String,
     updatedAt: String,
     email: String,
+    bookmarks: [String]
 });
 
 module.exports = model('Users', userSchema);
