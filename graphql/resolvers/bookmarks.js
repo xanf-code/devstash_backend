@@ -30,7 +30,11 @@ module.exports = {
                             bookmark.remove(postID);
                         }
                         else {
-                            bookmark.push(postID);
+                            if (bookmark.length < 3) {
+                                bookmark.push(postID);
+                            } else {
+                                throw new Error('LIMIT has been reached');
+                            }
                         }
                         await userData.save();
                         return userData;
@@ -39,7 +43,7 @@ module.exports = {
                     }
                 }
             } catch (error) {
-                throw new Error('Something went wrong!', error);
+                throw new Error('Something went wrong!');
             }
         }
     }
