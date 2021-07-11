@@ -47,7 +47,12 @@ module.exports = gql`
         name: String!
         createdAt: String!
         updatedAt: String!
-        bookmarks: [String!]
+        bookmarks: Bookmark!
+    }
+    type Bookmark {
+        name: String
+        public: Boolean
+        bookmark: [String]
     }
     type Query{
         getPosts(limit: Int, tag: String, page: Int, sortBy: String): StashResponse!
@@ -64,5 +69,6 @@ module.exports = gql`
         likePost(userID: String! postID: ID!) : Post!
         addView(userID: String! postID: ID!) : Post!
         addBookmark(userID: String! postID: String!) : User!
+        addStashName(userID: String! name: String!) : String!
     }
 `;

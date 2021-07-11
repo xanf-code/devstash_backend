@@ -6,7 +6,17 @@ const userSchema = new Schema({
     createdAt: String,
     updatedAt: String,
     email: String,
-    bookmarks: [String]
+    bookmarks: {
+        name: {
+            type: String,
+            default: "Example-Stash"
+        },
+        public: {
+            type: Boolean,
+            default: true
+        },
+        bookmark: [String]
+    }
 });
 
 module.exports = model('Users', userSchema);

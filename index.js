@@ -24,6 +24,7 @@ let mongoURL = process.env.MONGODB;
 mongoose.connect(mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
 }).then(() => {
     console.log(`MongoDB Connected`)
     return server.listen({ port: PORT })

@@ -7,7 +7,7 @@ module.exports = {
             try {
                 if (userID) {
                     const userData = await Users.findById(userID);
-                    const bookmarks = userData.bookmarks;
+                    const bookmarks = userData.bookmarks.bookmark;
                     const posts = await Posts.find({ '_id': { $in: bookmarks } });
                     return posts;
                 }
@@ -25,7 +25,7 @@ module.exports = {
                 if (userID && postID) {
                     const userData = await Users.findById(userID);
                     if (userData) {
-                        const bookmark = userData.bookmarks;
+                        const bookmark = userData.bookmarks.bookmark;
                         if (bookmark.includes(postID)) {
                             bookmark.remove(postID);
                         }
@@ -41,6 +41,23 @@ module.exports = {
                     } else {
                         throw new Error('No user associated with this user ID');
                     }
+                }
+            } catch (error) {
+                throw new Error('Something went wrong!');
+            }
+        },
+        async addStashName(_, { userID, name }) {
+            try {
+                const user = Users.findById(userID)
+                if (user) {
+                    await Users.findByIdAndUpdate(
+                        userID,
+                        {
+                            $set: {
+                                'bookmarks.name': name
+                            }
+                        });
+                    return `Updated to ${name}`;
                 }
             } catch (error) {
                 throw new Error('Something went wrong!');
