@@ -30,7 +30,7 @@ module.exports = {
                             bookmark.remove(postID);
                         }
                         else {
-                            if (bookmark.length < 3) {
+                            if (bookmark.length < 25) {
                                 bookmark.push(postID);
                             } else {
                                 throw new Error('LIMIT has been reached');
